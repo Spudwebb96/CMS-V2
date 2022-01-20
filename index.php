@@ -10,11 +10,11 @@ $response = $query->fetchall(\PDO::FETCH_ASSOC);
 
 var_dump($_GET, $_POST);
 
-if (isset($_GET)){
+if (isset($_GET['update'])){
     $update->addrow($inst);
-    header("index.php");
+    header("Location: index.php");
     exit;
-};
+}
 
 ?>
 <a href="index.php?update=true">Click me</a>
