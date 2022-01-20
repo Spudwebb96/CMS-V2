@@ -10,10 +10,10 @@ require_once 'db.php';
 
 class update
 {
-    public function addrow()
+    public function addrow($db)
     {
         $sql = "INSERT INTO `stuff` (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`) VALUES ('asd', '1', 'asd', '1', '1', 'asd', '1', '1')";
-        $stmt = $db->prepare("INSERT INTO `stuff` (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`) VALUES ('asd', '1', 'asd', '1', '1', 'asd', '1', '1')");
+        $stmt = $db->db->prepare("INSERT INTO `stuff` (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`) VALUES ('asd', '1', 'asd', '1', '1', 'asd', '1', '1')");
         $stmt->execute();        
     }
 }
