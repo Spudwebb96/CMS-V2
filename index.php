@@ -48,6 +48,3 @@ if (isset($_POST['update'])){
     </tr>
 <?php } ?> 
 </table>
-
-
-
