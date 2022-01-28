@@ -10,19 +10,27 @@ $response = $query->fetchall(\PDO::FETCH_ASSOC);
 
 var_dump($_GET, $_POST);
 
-if (isset($_GET['update'])){
-    $update->addrow($inst);
-    header("Location: index.php");
-    exit;
-}
+// if (isset($_POST['update'])){
+//     $update->addrow($inst);
+
+// };
+
+if (isset($_POST['update'])){
+    $update->addrowm($inst,$_POST['a'],$_POST['b'],$_POST['c'],$_POST['d']);
+};
 
 ?>
-<a href="index.php?update=true">Click me</a>
-<a href="test.php">Click me</a>
+<!-- <a href="index.php?update=true">Click me</a>
+<a href="test.php">Click me</a> -->
 
-<form action="index.php?update=true" method="post" target="_self">
+<form action="index.php" method="post" target="_self">
 
-<button>XXX</button>
+    <input type="hidden" name="update" value="true">
+    <input type="text" name="a" value="asd">
+    <input type="number" name="b" value="2">
+    <input type="text" name="c" value="asd">
+    <input type="number" name="d" value="3">
+    <button>XXX</button>
 
 </form>
 

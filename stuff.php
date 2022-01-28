@@ -16,5 +16,12 @@ class update
         $stmt = $db->db->prepare("INSERT INTO `stuff` (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`) VALUES ('asd', '1', 'asd', '1', '1', 'asd', '1', '1')");
         $stmt->execute();        
     }
+
+    public function addrowm($db,$a,$b,$c,$d)
+    {
+        $sql = "INSERT INTO `stuff` (`a`, `b`, `c`, `d`) VALUES (" . $a . "," . $b . "," . $c . "," . $d . ")";
+        $stmt = $db->db->prepare($sql);
+        $stmt->execute();        
+    }
 }
 ?>
