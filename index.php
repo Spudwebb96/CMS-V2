@@ -5,7 +5,7 @@ require_once 'stuff.php';
 $inst = new DB();
 $update = new update();
 
-$query = $inst->db->query('SELECT * FROM stuff');
+$query = $inst->db->query('SELECT * FROM stats');
 $response = $query->fetchall(\PDO::FETCH_ASSOC);
 
 var_dump($_GET, $_POST);
@@ -16,7 +16,7 @@ var_dump($_GET, $_POST);
 // };
 
 if (isset($_POST['update'])){
-    $update->addrowm($inst,$_POST['a'],$_POST['b'],$_POST['c'],$_POST['d']);
+    $update->addrowm($inst,$_POST['firstname'],$_POST['lastname'],$_POST['ppg'],$_POST['rpg'],$_POST['apg'],$_POST['spg'],$_POST['tpg'],$_POST['team']);
     header("Location: index.php");
     exit;
 };
@@ -28,10 +28,14 @@ if (isset($_POST['update'])){
 <form action="index.php" method="post" target="_self">
 
     <input type="hidden" name="update" value="true">
-    <input type="text" name="a" value="asd">
-    <input type="number" name="b" value="2">
-    <input type="text" name="c" value="asd">
-    <input type="number" name="d" value="3">
+    <input type="text" name="firstname" value="Mike">    
+    <input type="text" name="lastname" value="Jordan">
+    <input type="number" step="0.01" name="ppg" value="23">
+    <input type="number" step="0.01" name="rpg" value="23">
+    <input type="number" step="0.01" name="apg" value="23">
+    <input type="number" step="0.01" name="spg" value="23">
+    <input type="number" step="0.01" name="tpg" value="23">
+    <input type="text" step="0.01" name="team" value="Bulls">
     <button>XXX</button>
 
 </form>

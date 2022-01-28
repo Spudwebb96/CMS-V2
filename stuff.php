@@ -17,16 +17,20 @@ class update
         $stmt->execute();        
     }
 
-    public function addrowm($db,$a,$b,$c,$d)
+    public function addrowm($db,$a,$b,$c,$d,$e,$f,$g,$h)
     {
-        $sql = "INSERT INTO stuff (a,b,c,d) 
-        VALUES (:a, :b, :c, :d)";
+        $sql = "INSERT INTO stuff ('First Name','Last Name','PPG','RPG','APG','SPG','TPG','Team') 
+        VALUES (':First Name',':Last Name',:PPG,:RPG,:APG,:SPG,:TPG,:Team)";
         $stmt = $db->db->prepare($sql);
 
-        $stmt->bindParam(':a', $a, \PDO::PARAM_STR);
-        $stmt->bindParam(':b', $b, \PDO::PARAM_INT);
-        $stmt->bindParam(':c', $c, \PDO::PARAM_STR);
-        $stmt->bindParam(':d', $d, \PDO::PARAM_INT);
+        $stmt->bindParam(':First Name', $a, \PDO::PARAM_STR);
+        $stmt->bindParam(':Last Name', $b, \PDO::PARAM_STR);
+        $stmt->bindParam(':PPG', $c, \PDO::PARAM_INT);
+        $stmt->bindParam(':RPG', $d, \PDO::PARAM_INT);
+        $stmt->bindParam(':APG', $e, \PDO::PARAM_INT);
+        $stmt->bindParam(':SPG', $f, \PDO::PARAM_INT);
+        $stmt->bindParam(':TPG', $g, \PDO::PARAM_INT);
+        $stmt->bindParam(':Team', $h, \PDO::PARAM_STR);
 
         $stmt->execute();  
         echo $sql;      

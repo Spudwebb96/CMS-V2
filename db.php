@@ -6,7 +6,7 @@ class DB
 
     public function __construct(){
 
-        $this->db = new PDO('mysql:host=localhost;port=3306;dbname=superdb;', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;port=3306;dbname=bball;', 'root', '');
     } 
     
 }
