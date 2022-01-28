@@ -19,9 +19,18 @@ class update
 
     public function addrowm($db,$a,$b,$c,$d)
     {
-        $sql = "INSERT INTO `stuff` (`a`, `b`, `c`, `d`) VALUES (" . $a . "," . $b . "," . $c . "," . $d . ")";
+        $sql = "INSERT INTO stuff (a,b,c,d) 
+        VALUES (:a, :b, :c, :d)";
         $stmt = $db->db->prepare($sql);
-        $stmt->execute();        
+
+        $stmt->bindParam(':a', $a, \PDO::PARAM_STR);
+        $stmt->bindParam(':b', $b, \PDO::PARAM_INT);
+        $stmt->bindParam(':c', $c, \PDO::PARAM_STR);
+        $stmt->bindParam(':d', $d, \PDO::PARAM_INT);
+
+        $stmt->execute();  
+        echo $sql;      
     }
 }
 ?>
+

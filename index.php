@@ -17,6 +17,8 @@ var_dump($_GET, $_POST);
 
 if (isset($_POST['update'])){
     $update->addrowm($inst,$_POST['a'],$_POST['b'],$_POST['c'],$_POST['d']);
+    header("Location: index.php");
+    exit;
 };
 
 ?>
