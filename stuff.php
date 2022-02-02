@@ -41,14 +41,15 @@ class create
         $stmt = $this->db->prepare("UPDATE stats SET firstname = :firstname, lastname = :lastname, ppg = :ppg,
          rpg = :rpg, apg = :apg, spg = :spg, tpg = :tpg, team = :team WHERE id = :id");
 
-        $firstname = $stats->getfirstname();
-        $lastname = $stats->getlastname();
-        $ppg = $stats->getppg();
-        $rpg = $stats->getrpg();
-        $apg = $stats->getapg();
-        $spg = $stats->getspg();
-        $tpg = $stats->gettpg();
-        $team = $stats->getteam();
+        $firstname = $this->getfirstname();
+        $lastname = $this->getlastname();
+        $ppg = $this->getppg();
+        $rpg = $this->getrpg();
+        $apg = $this->getapg();
+        $spg = $this->getspg();
+        $tpg = $this->gettpg();
+        $team = $this->getteam();
+        $id = $this->getid();
 
         $stmt->bindParam(':firstname', $firstname, \PDO::PARAM_STR);
         $stmt->bindParam(':lastname', $lastname, \PDO::PARAM_STR);

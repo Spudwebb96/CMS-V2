@@ -18,8 +18,10 @@ if (isset($_POST['create'])){
     exit;
 };
 
-if (isset($_POST['update'])){
-    $create->updaterow($id);
+if (isset($_POST['id'])){
+    $create->updaterow($_POST['id']);
+    header("Location: index.php");
+    exit;
 }
 
 ?>
@@ -53,7 +55,7 @@ if (isset($_POST['update'])){
         </td>
     <?php } ?> <td>
         <form action="index.php" method="post" target="_self">
-            <input type="hidden" name="update" value="<?php echo $row["id"]?>">
+            <input type="hidden" name="id" value="<?php echo $row["id"]?>">
             <button>Edit</button> 
         </form> 
     </td>
