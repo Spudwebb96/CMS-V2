@@ -1,9 +1,9 @@
 <?php
 require_once 'db.php';
-require_once 'stuff.php';
+require_once 'player.php';
 
 $inst = new DB();
-$create = new create();
+$player = new Player();
 
 $query = $inst->db->query('SELECT * FROM stats');
 $response = $query->fetchall(\PDO::FETCH_ASSOC);
@@ -11,15 +11,8 @@ $response = $query->fetchall(\PDO::FETCH_ASSOC);
 var_dump($_GET, $_POST);
 
 
-
-if (isset($_POST['create'])){
-    $create->addrowm($inst,$_POST['firstname'],$_POST['lastname'],$_POST['ppg'],$_POST['rpg'],$_POST['apg'],$_POST['spg'],$_POST['tpg'],$_POST['team']);
-    header("Location: index.php");
-    exit;
-};
-
 if (isset($_POST['id'])){
-    $create->updaterow($_POST['id']);
+    $player->updaterow($_POST['id']);
     header("Location: index.php");
     exit;
 }
