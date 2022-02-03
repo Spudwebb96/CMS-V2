@@ -133,6 +133,20 @@ class Player
 
     }
 
+    public static function delete($db,$id)
+    {
+        $sql = $db->db->prepare("DELETE FROM stats WHERE id = :id ");
+        
+
+        $sql->bindParam(':id', $id, \PDO::PARAM_INT);
+
+        $sql->execute();
+
+        // $player = new Player();
+        // $player->setid('id');
+
+    }
+
     public function getfirstname(): string
     {
         return $this->firstname;
