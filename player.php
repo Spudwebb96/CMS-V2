@@ -19,6 +19,12 @@ class Player
     private string $spg;
     private string $tpg;
     private string $team;
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
 
     public static function create($db,$a,$b,$c,$d,$e,$f,$g,$h)
     {
@@ -39,7 +45,7 @@ class Player
 
         $id = $db->db->lastInsertId();
 
-        $player = new Player();
+        $player = new Player($db);
         $player->setfirstname($a);
         $player->setlastname($b);
         $player->setppg($c);
@@ -54,9 +60,9 @@ class Player
         
     }
 
-    public function updaterow($id)
+    public function updaterow()
     {
-        $stmt = $this->db->prepare("UPDATE stats SET firstname = :firstname, lastname = :lastname, ppg = :ppg,
+        $stmt = $this->db->db->prepare("UPDATE stats SET firstname = :firstname, lastname = :lastname, ppg = :ppg,
          rpg = :rpg, apg = :apg, spg = :spg, tpg = :tpg, team = :team WHERE id = :id");
 
         $firstname = $this->getfirstname();
@@ -71,11 +77,11 @@ class Player
 
         $stmt->bindParam(':firstname', $firstname, \PDO::PARAM_STR);
         $stmt->bindParam(':lastname', $lastname, \PDO::PARAM_STR);
-        $stmt->bindParam(':ppg', $ppg, \PDO::PARAM_INT);
-        $stmt->bindParam(':rpg', $rpg, \PDO::PARAM_INT);
-        $stmt->bindParam(':apg', $apg, \PDO::PARAM_INT);
-        $stmt->bindParam(':spg', $spg, \PDO::PARAM_INT);
-        $stmt->bindParam(':tpg', $tpg, \PDO::PARAM_INT);
+        $stmt->bindParam(':ppg', $ppg);
+        $stmt->bindParam(':rpg', $rpg);
+        $stmt->bindParam(':apg', $apg);
+        $stmt->bindParam(':spg', $spg);
+        $stmt->bindParam(':tpg', $tpg);
         $stmt->bindParam(':team', $team, \PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
 
@@ -91,7 +97,7 @@ class Player
         $stmt->execute(); 
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);  
         
-        $player = new Player();
+        $player = new Player($db);
         $player->setfirstname($res['firstname']);
         $player->setlastname($res['lastname']);
         $player->setppg($res['ppg']);
@@ -115,7 +121,7 @@ class Player
 
         $array = array();
         foreach ($data as $row){
-            $player = new Player();
+            $player = new Player($db);
             $player->setfirstname($row['firstname']);
             $player->setlastname($row['lastname']);
             $player->setppg($row['ppg']);
@@ -133,10 +139,11 @@ class Player
 
     }
 
-    public static function delete($db,$id)
+    public function delete()
     {
-        $sql = $db->db->prepare("DELETE FROM stats WHERE id = :id ");
+        $sql = $this->db->db->prepare("DELETE FROM stats WHERE id = :id ");
         
+        $id = $this->getid();
 
         $sql->bindParam(':id', $id, \PDO::PARAM_INT);
 
@@ -145,6 +152,11 @@ class Player
         // $player = new Player();
         // $player->setid('id');
 
+    }
+
+    public static function update($id)
+    {
+        //
     }
 
     public function getfirstname(): string

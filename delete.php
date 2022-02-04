@@ -10,12 +10,8 @@ $players = Player::indexof($inst);
 if (isset($_POST["id"])){
     $id = $_POST["id"];
     $b = Player::show($inst,$id);
-    $p = Player::delete($inst,$_POST["id"]);
+    $b->delete(); 
     echo $b->getfirstname() . " " . $b->getlastname() . " with the id " . $b->getid() . " has been erased from the database.";
-
-    
-
-    
 }
 ?>
 
@@ -24,11 +20,13 @@ if (isset($_POST["id"])){
 <?php foreach ($players as $player) { ?>
 
     <table>
-        <h2><?php echo $player->getid() . " " . $player->getfirstname() . " " . $player->getlastname()?></h2>
+        <h2><?php echo $player->getid() . " "?><a href="get.php?id=<?php echo $player->getid()?>"><?php echo $player->getfirstname() . " " . $player->getlastname()?></a></h2>
         <form action="delete.php" method="post" target="_self">
             <input type="hidden" name="id" value="<?php echo $player->getid()?>">
             <button>Delete</button> 
         </form> 
+        <a href="update.php?id=<?php echo $player->getid()?>">Edit</a>
+            
         
             <tr>  
                 <td>PPG : </td>
