@@ -3,7 +3,7 @@ require_once 'db.php';
 require_once 'player.php';
 
 $inst = new DB();
-$player = new Player();
+$player = new Player($inst);
 
 $query = $inst->db->query('SELECT * FROM stats');
 $response = $query->fetchall(\PDO::FETCH_ASSOC);

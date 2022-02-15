@@ -10,7 +10,10 @@ $p = Player::show($inst,$id)
 
 ?>
 <h1><?php echo $p->getfirstname() . " " . $p->getlastname() ?></h1>
-
+<form action="get.php" method="post" target="_self">
+    <input type="hidden" name="id" value="<?php echo $p->getid()?>">
+    <button>Edit</button> 
+</form>
 <table>
 <tr>
         <td>Ppg</td>
