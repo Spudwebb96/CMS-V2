@@ -1,5 +1,6 @@
 <?php
-require_once './players/db.php';
+
+require_once 'db.php';
 
 class Team
 {
@@ -43,6 +44,29 @@ class Team
         $team->setid($id);
   
         return $team;
+    }
+
+    public static function indexof($db){
+        
+        $stmt = $db->db->prepare("SELECT * from team");
+        $stmt->execute(); 
+        $data = $stmt->fetchall(\PDO::FETCH_ASSOC); 
+
+        $array = array();
+        foreach ($data as $row){
+            $team = new Team($db);
+            $team->setteams($row['teams']);
+            $team->setcity($row['city']);
+            $team->setstate($row['state']);
+            $team->setwins($row['wins']);
+            $team->setloses($row['loses']);
+            $team->setstadium($row['stadium']);
+            $team->setid($row['id']);
+            
+            array_push($array, $team);
+        }
+
+        return $array;
     }
 
     public function getteams(): string
